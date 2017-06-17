@@ -26,18 +26,20 @@ rankhospital <- function(state, outcome, num = 'best') {
     outcome_ind <- which(outcome == pos_outcomes)
     outcome_col <- c(11, 17, 23)
     state_outcomes <-
-        outcomes[outcomes$State %in% state,]  # state subset
+        outcomes[outcomes$State %in% state, ]  # state subset
     column_no <-
         outcome_col[[outcome_ind]]  # column corresponding to outcome
     
     if (num == 'worst') {
         ind1 <- which.max(state_outcomes[, column_no])
-        entry <- state_outcomes[ind1, ]
+        entry <- state_outcomes[ind1,]
     }
     else {
-        state_outcomes[, column_no] <- as.numeric(state_outcomes[, column_no])
-        ordered <- state_outcomes[order(state_outcomes[, column_no], state_outcomes$Hospital.Name), ]
-        entry <- ordered[num, ]
+        state_outcomes[, column_no] <-
+            as.numeric(state_outcomes[, column_no])
+        ordered <-
+            state_outcomes[order(state_outcomes[, column_no], state_outcomes$Hospital.Name),]
+        entry <- ordered[num,]
     }
     entry$Hospital.Name
     
